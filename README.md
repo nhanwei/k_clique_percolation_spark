@@ -1,5 +1,5 @@
 # K Clique Percolation in Pyspark
-I implemented an **overlapping community detection** algorithm in **Pyspark**. Specifically, it is called **Clique Percolation Method** or **K-Clique Percolation Method** as described in the paper https://www.researchgate.net/publication/7797121_Uncovering_the_overlapping_community_structure_of_complex_networks_in_nature_and_society.
+Over the weekend, I implemented an **overlapping community detection** algorithm in **Pyspark**. Specifically, it is called **Clique Percolation Method** or **K-Clique Percolation Method** as described in the paper https://www.researchgate.net/publication/7797121_Uncovering_the_overlapping_community_structure_of_complex_networks_in_nature_and_society.
 
 ## Intuition
 The K-Clique Percolation algorithm is based on the assumption that **internal edges of the community are likely to form cliques** while **intercommunity edges tend not to**. This algorithm first 
