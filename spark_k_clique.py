@@ -2,26 +2,6 @@ from collections import defaultdict
 import sys
 from pyspark import SparkContext, SparkConf
 import json
-# from networkx.algorithms.clique import find_cliques
-# import networkx as nx
-# import pandas as pd
-# import time
-
-# def get_clique(datafile):
-#       df = pd.read_csv(datafile, delimiter="\t", skiprows = 3, header=0, names=["from","to"], engine='python')
-#       # df = pd.read_csv("C:\\Users\\nhanw\\OneDrive\\Desktop\\graph_proj\\sample.csv", names =['from', 'to'])
-#       # pandas to graph
-#       G = nx.from_pandas_edgelist(df, source='from', target='to')
-#       count = 1
-#       start = time.time()
-#       clique_list = []
-#       for i in find_cliques(G):
-#               clique_list.append(i)
-#               if count % 100 == 0:
-#                       print("Written out ", count, "cliques")
-#                       print("Time elapsed ", time.time() - start)
-#               count += 1
-#       return clique_list
 
 if __name__ == "__main__":
 
@@ -53,7 +33,7 @@ if __name__ == "__main__":
         # remove if size of overlap is less than k
         triangle_rdd_filtered = triangle_rdd.filter(lambda x: x[6] >= k-1)
         # out: [([1, 2, 3, 4, 5], 0, [3, 4, 5, 6], 1, 5, 4, 3), ([3, 4, 5, 6], 1, [1, 2, 3, 4, 5], 0, 4, 5, 3), ([1, 2, 3, 4, 5], 0, [1, 2, 3, 9], 3, 5, 4, 3), ([1, 2, 3, 9], 3, [1, 2, 3, 4, 5], 0, 4, 5, 3)]
-        print("diag_rdd", diag_rdd.collect())
+        # print("diag_rdd", diag_rdd.collect())
 
         # remove if size of clique is less than k
         # clique_list contains the cliques that will be in a community
@@ -62,10 +42,8 @@ if __name__ == "__main__":
         # unprocessed_clique_list contains the cliques that haven't been processed
         community_dict = defaultdict(int)
         community_counter = 0
-        # key value pair -> 
 
         # looping through the all the cliques
-        print("clique_list", clique_list)
         for i in clique_list:
                 print('Processing', i)
                 # get the cliques who are in a community with clique i
@@ -90,14 +68,8 @@ if __name__ == "__main__":
                                 community_id = community_dict[list(intersection_of_clique)[0]]
                                 for j in set(sum(clique_community_index, [])):# all the cliques get the same community id
                                         community_dict[j] = community_id
-                # clique_community.collect()
-                # print('community_dict', community_dict)
-                # print("clique_community", clique_community.collect())
-                # print(([sum(subsublist, []) for subsublist in clique_community.map(lambda x: [x[0], x[2]]).collect()], []))
-                # print(set(sum([sum(subsublist, []) for subsublist in clique_community.map(lambda x: [x[0], x[2]]).collect()], [])))
 
-        print("clique_community", clique_community.collect())
-        print("community_dict", community_dict)
+        # write out results
         json.dump(community_dict, open(sys.argv[3], 'w'))
 
 
