@@ -1,5 +1,5 @@
 # K Clique Percolation in Pyspark
-Over the weekend, I implemented an **overlapping community detection** algorithm in **Pyspark**. Specifically, it is called **Clique Percolation Method** or **K-Clique Percolation Method** as described in the paper https://www.researchgate.net/publication/7797121_Uncovering_the_overlapping_community_structure_of_complex_networks_in_nature_and_society.
+I implemented an **overlapping community detection** algorithm in **Pyspark**. Specifically, it is called **Clique Percolation Method** or **K-Clique Percolation Method** as described in the paper https://www.researchgate.net/publication/7797121_Uncovering_the_overlapping_community_structure_of_complex_networks_in_nature_and_society.
 
 ## Intuition
 The K-Clique Percolation algorithm is based on the assumption that **internal edges of the community are likely to form cliques** while **intercommunity edges tend not to**. This algorithm first 
@@ -15,7 +15,7 @@ We have to find the maximal cliques first.
 python get_clique.py sample.csv clique_out
 ```
 
-get_clique.py: Uses networkx library to find and write out the maximal cliques into clique_out.csv. You shouldn't encounter memory issue at here because the main function returns an iterator and avoids storing all cliques in memory by only keeping current candidate node lists in memory during its search.
+get_clique.py: Uses networkx library to find and write out the maximal cliques into clique_out.csv. You shouldn't encounter memory issue here because the main function returns an iterator and avoids storing all cliques in memory by only keeping current candidate node lists in memory during its search.
 
 sample.csv: Sample adjacency matrix
 
